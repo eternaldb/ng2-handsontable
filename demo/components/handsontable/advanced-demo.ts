@@ -2,7 +2,7 @@
 
 
 import {Component} from 'angular2/core';
-import {NgClass,CORE_DIRECTIVES,FORM_DIRECTIVES} from 'angular2/common';
+import {NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 
 import {handsontable} from '../../../components/index';
 import {getAdvancedData} from './data';

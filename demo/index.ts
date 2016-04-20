@@ -1,5 +1,5 @@
 /// <reference path="../tsd.d.ts" />
-import {Component,} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {NgClass} from 'angular2/common';
 import {bootstrap}    from 'angular2/platform/browser';
 

@@ -4,6 +4,7 @@ gulp.paths = {
   tssrc: [
     '**/*.ts',
     '!node_modules/**/*',
+    '!demo/lib/**/*',
     '!dist/**/*',
     '!typings/**/*',
     '!typings-persist/**/*',

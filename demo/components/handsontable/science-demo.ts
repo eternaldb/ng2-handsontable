@@ -1,7 +1,7 @@
 /// <reference path="../../../tsd.d.ts" />
 
 import {Component} from 'angular2/core';
-import {NgClass,CORE_DIRECTIVES,FORM_DIRECTIVES} from 'angular2/common';
+import {NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 
 import {handsontable} from '../../../components/index';
 import {getScienceData} from './data';
@@ -22,7 +22,7 @@ function updateHeatmap(change, source) {
   } else {
     heatmap = [];
 
-    for (var i = 1, colCount = this.countCols(); i < colCount; i++) {
+    for (let i = 1, colCount = this.countCols(); i < colCount; i++) {
       heatmap[i] = generateHeatmapData(this, i);
     }
   }
