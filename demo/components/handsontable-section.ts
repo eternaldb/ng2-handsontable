@@ -1,6 +1,6 @@
 /// <reference path="../../tsd.d.ts" />
 
-import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2';
+import {Component, View, CORE_DIRECTIVES} from 'angular2/core';
 
 import {tabs} from 'ng2-bootstrap/ng2-bootstrap';
 import {BasicDemo} from './handsontable/basic-demo';

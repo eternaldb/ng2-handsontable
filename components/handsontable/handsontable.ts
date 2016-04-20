@@ -1,46 +1,41 @@
-import {OnInit, OnDestroy, Directive, EventEmitter, ElementRef} from 'angular2/angular2';
+import {OnInit, OnDestroy, Component, EventEmitter, ElementRef, Input} from 'angular2/core';
 
 declare var Handsontable:Function;
 
-let eventNames:Array<string> = ['afterCellMetaReset', 'afterChange',
-  'afterCreateCol', 'afterCreateRow', 'afterDeselect',
-  'afterDestroy', 'afterDocumentKeyDown', 'afterGetCellMeta', 'afterGetColHeader', 'afterGetRowHeader',
-  'afterInit', 'afterIsMultipleSelectionCheck', 'afterLoadData',
-  'afterMomentumScroll', 'afterOnCellCornerMouseDown',
-  'afterOnCellMouseDown', 'afterOnCellMouseOver', 'afterRemoveCol', 'afterRemoveRow', 'afterRender',
-  'afterRenderer', 'afterScrollHorizontally', 'afterScrollVertically',
-  'afterSelection', 'afterSelectionByProp',
-  'afterSelectionEnd', 'afterSelectionEndByProp', 'afterSetCellMeta', 'afterUpdateSettings', 'afterValidate',
-  'beforeAutofill', 'beforeCellAlignment', 'beforeChange', 'beforeChangeRender', 'beforeDrawBorders',
-  'beforeGetCellMeta', 'beforeInit', 'beforeInitWalkontable', 'beforeKeyDown', 'beforeOnCellMouseDown',
-  'beforeRemoveCol', 'beforeRemoveRow', 'beforeRender', 'beforeSetRangeEnd', 'beforeTouchScroll',
-  'beforeValidate', 'construct', 'init', 'modifyCol', 'modifyColWidth', 'modifyRow', 'modifyRowHeight',
-  'persistentStateLoad', 'persistentStateReset', 'persistentStateSave'];
 
-@Directive({
+
+@Component({
   selector: 'hot-table',
-  properties: [
-    'data',
-    'colHeaders',
-    'columns',
-    'colWidths',
-    'options'
-  ],
-  events: eventNames
+  outputs:this.eventNames
 })
 export class HotTable implements OnInit, OnDestroy {
   private inst:any;
   private view:any;
 
-  private data:Array<any> = [];
-  private colHeaders:Array<string>;
-  private columns:Array<any>;
-  private colWidths:Array<number>;
-  private options:any;
+  @Input() data:Array<any> = [];
+  @Input() colHeaders:Array<string>;
+  @Input() columns:Array<any>;
+  @Input() colWidths:Array<number>;
+  @Input() options:any;
+
+  eventNames:Array<string> = ['afterCellMetaReset', 'afterChange',
+    'afterCreateCol', 'afterCreateRow', 'afterDeselect',
+    'afterDestroy', 'afterDocumentKeyDown', 'afterGetCellMeta', 'afterGetColHeader', 'afterGetRowHeader',
+    'afterInit', 'afterIsMultipleSelectionCheck', 'afterLoadData',
+    'afterMomentumScroll', 'afterOnCellCornerMouseDown',
+    'afterOnCellMouseDown', 'afterOnCellMouseOver', 'afterRemoveCol', 'afterRemoveRow', 'afterRender',
+    'afterRenderer', 'afterScrollHorizontally', 'afterScrollVertically',
+    'afterSelection', 'afterSelectionByProp',
+    'afterSelectionEnd', 'afterSelectionEndByProp', 'afterSetCellMeta', 'afterUpdateSettings', 'afterValidate',
+    'beforeAutofill', 'beforeCellAlignment', 'beforeChange', 'beforeChangeRender', 'beforeDrawBorders',
+    'beforeGetCellMeta', 'beforeInit', 'beforeInitWalkontable', 'beforeKeyDown', 'beforeOnCellMouseDown',
+    'beforeRemoveCol', 'beforeRemoveRow', 'beforeRender', 'beforeSetRangeEnd', 'beforeTouchScroll',
+    'beforeValidate', 'construct', 'init', 'modifyCol', 'modifyColWidth', 'modifyRow', 'modifyRowHeight',
+    'persistentStateLoad', 'persistentStateReset', 'persistentStateSave'];
 
   constructor(private element:ElementRef) {
     // fill events dynamically
-    eventNames.forEach(eventName => {
+    this.eventNames.forEach(eventName => {
       this[eventName] = new EventEmitter();
     });
   }
@@ -71,7 +66,7 @@ export class HotTable implements OnInit, OnDestroy {
     }
   }
 
-  onInit() {
+  ngOnInit() {
     this.view = document.createElement('div');
     this.view.class = 'handsontable-container';
     this.element.nativeElement.appendChild(this.view);
@@ -80,7 +75,7 @@ export class HotTable implements OnInit, OnDestroy {
       data: this.data
     };
 
-    eventNames.forEach(eventName => {
+    this.eventNames.forEach(eventName => {
       htOptions[eventName] = data => {
         this[eventName].next(data);
       };
@@ -108,7 +103,7 @@ export class HotTable implements OnInit, OnDestroy {
     }
   }
 
-  onDestroy() {
+  ngOnDestroy() {
     if (this.view) {
       this.view.remove();
     }
