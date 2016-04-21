@@ -1,11 +1,12 @@
 import {OnInit, OnDestroy, Component, EventEmitter, ElementRef, Input} from 'angular2/core';
 
-declare var Handsontable:Function;
+// declare var Handsontable:Function;
 
 
 
 @Component({
   selector: 'hot-table',
+  template:`<h1>smartform</h1>`,
   outputs:this.eventNames
 })
 export class HotTable implements OnInit, OnDestroy {
@@ -67,11 +68,11 @@ export class HotTable implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.view = document.createElement('div');
-    this.view.class = 'handsontable-container';
-    this.element.nativeElement.appendChild(this.view);
+    // this.view = document.createElement('div');
+    // this.view.class = 'handsontable-container';
+    // this.element.nativeElement.appendChild(this.view);
 
-    let htOptions:any = {
+    /*let htOptions:any = {
       data: this.data
     };
 
@@ -100,7 +101,7 @@ export class HotTable implements OnInit, OnDestroy {
       this.columns.forEach(column => {
         this.parseAutoComplete(column, this.data);
       });
-    }
+    }*/
   }
 
   ngOnDestroy() {
@@ -110,4 +111,4 @@ export class HotTable implements OnInit, OnDestroy {
   }
 }
 
-export const handsontable:Array<any> = [HotTable];
+// export const handsontable:Array<any> = [HotTable];
